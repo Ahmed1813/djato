@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="row align-items-center">
+    <div class="card border border-dark rounded-lg col-10 col-md-8 col-lg-5 mx-auto">
+        <div class="card-header">
+            <div class="card-title text-center">
+                <h1>{{ form_title }}</h1>
+            </div>
+        </div>
+        <div class="card-body">
+            {% crispy form form.helper %}
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

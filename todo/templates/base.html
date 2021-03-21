@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    {% block head %}
+    {% endblock head %}
+</head>
+
+<body style='font-family: "Poppins"'>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'todo:home' %}">DJATO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{ home_class }}" href="{% url 'todo:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ group_class }}" href="{% url 'todo:groups' %}">Groups</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ feature_class }}" href="{% url 'todo:features' %}">Features</a>
+                </li>
+            </ul>
+            <div class="btn-group my-2 my-lg-0 float-right" role="group">
+                {% if request.user.is_anonymous %}
+                <a class="btn btn-outline-success" href="{% url 'user:login' %}">Login</a>
+                <a class=" btn btn-outline-success" href="{% url 'user:register' %}">Register</a>
+                {% else %}
+                <div class="nav-item">
+                    <span class="nav-link text-secondary">{{ request.user }}</span>
+                </div>
+                <a class="btn btn-danger" href="{% url 'user:logout' %}">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <i class='fa fa-check'></i>
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="container mt-4">
+        {% block body %}
+        {% endblock body %}
+    </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>DJATO | Todo List</title>
+{% endblock %}
+
+
+{% block body %}
+<h1 class="text-center"> {{ group.group_name }}</h1>
+<p class='text-center text-muted'>{{ group.group_description }}</p>
+<div class="container text-center">
+    <a class="btn btn-success" href="{% url 'todo:add_todo' group.pk %}"><i class="fa fa-plus"></i> <span>
+            Add
+            Todo</span></a>
+</div>
+<hr>
+
+<div class="container mt-3">
+    {% for todo in todos_list %}
+    {% if todo.completed %}
+    <h2 style='text-decoration: line-through;'>{{ todo.title }}</h2>
+    {% else %}
+    <h2>{{ todo.title }}</h2>
+    {% endif %}
+
+    {% if todo.completed %}
+    <a class="btn btn-warning" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Uncomplete</a>
+    {% else %}
+    <p class="my-4" style="white-space: pre-wrap;">{{ todo.description }}</p>
+    <a class="btn btn-info" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Complete</a>
+    {% endif %}
+    <a class="btn btn-danger float-right ml-3" href="{% url 'todo:delete_todo' group.pk todo.pk %}">Delete</a>
+    <a class="btn btn-primary float-right" href="{% url 'todo:edit_todo' group.pk todo.pk %}">Edit</a>
+    <hr class="my-4">
+    {% endfor %}
+</div>
+{% endblock %}

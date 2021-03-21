@@ -1,0 +1,9 @@
+*.sw[op]
+*.pyc
+__pycache__
+*.db
+*.bak
+
+.vscode/
+
+db.sqlite3

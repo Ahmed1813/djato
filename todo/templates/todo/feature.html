@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Features | DJATO</title>
+{% endblock head %}
+
+{% block body %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome, Forks!</h1>
+    <p class="lead">This is DJATO, a simple and secure todo app.</p>
+    <hr class="my-4">
+    <h4>🚀 Features</h4>
+    <ul>
+        <li>User Authentication System</li>
+        <li>You can create individual group</li>
+        <li>You can create individual todo item in a group.</li>
+        {% comment %} <li>You can search for lists.</li>
+        <li>You can search for todo item in a list.</li> {% endcomment %}
+    </ul>
+    <p>So why are you waiting? click down below 👇</p>
+    <a class="btn btn-primary btn-lg" {% if request.user.is_anonymous %} href="{% url 'user:register' %}" {% else %}
+        href="{% url 'todo:groups' %}" {% endif %}>Let's Start</a>
+</div>
+{% endblock body %}

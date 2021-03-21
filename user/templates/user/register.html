@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block head %}
+<title>Register | DJATO</title>
+{% endblock head %}
+
+{% block body %}
+
+<div class="row align-items-center">
+    <div class="card border border-dark rounded-lg col-10 col-md-8 col-lg-5 mx-auto">
+        <div class="card-header">
+            <div class="card-title text-center">
+                <h1>Register</h1>
+            </div>
+        </div>
+        <div class="card-body">
+            {% crispy form %}
+            {% comment %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">{{ form.username.label }}</label>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-envelope-square"></i>
+                            </span>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                    {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">{{ form.password1.label }}</label>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        {{ form.password1 }}
+                    </div>
+                    {% if form.password1.errors %}
+                    {% for error in form.password1.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+                <div class="form-group">
+                    <label for="id_password2">{{ form.password2.label }}</label>
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-key"></i>
+                            </span>
+                        </div>
+                        {{ form.password2 }}
+                    </div>
+                    {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block p-2" id="register-btn">Register</button>
+            </form> {% endcomment %}
+            <small class="form-text text-muted text-center mt-2 pt-1">Already have an account? Then please
+                <a
+                    href="{% if request.GET.next %} {% url 'user:login' %}?next={{ request.GET.next }} {% else %} {% url 'user:login' %} {% endif %}">
+                    sign in</a>
+            </small>
+
+        </div>
+    </div>
+</div>
+
+{% comment %}
+<script>
+    const inputs = document.querySelectorAll("form input");
+    const divs = document.querySelectorAll(".input-group + div");
+    inputs[1].placeholder = "Username"
+    inputs[2].placeholder = "Password"
+    inputs[3].placeholder = "Retype Password"
+
+    for (let input of inputs) {
+        input.className += " form-control";
+        if (input.required) {
+            input.parentElement.previousElementSibling.append("*")
+        }
+    }
+
+
+    for (let div of divs) {
+        div.previousElementSibling.children[1].className += " is-invalid"
+    }
+</script> {% endcomment %}
+{% endblock body %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Groups | DJATO</title>
+{% endblock head %}
+
+{% block body %}
+<a class="btn btn-outline-primary" href="{% url 'todo:add_group' %}">
+    <i class="fa fa-plus-circle"></i>
+    <span>New</span>
+</a>
+
+<div class="row row-cols-sm-1 row-cols-lg-3">
+    {% for object in object_list %}
+    <div class="col mx-auto my-2">
+        <a href="{% url 'todo:todos_list' object.pk %}" class="card-link text-secondary">
+            <div class="card col-12">
+                <div class="card-body" title="{{ object.group_name }}">
+                    <h3 class='card-title'>{{ object.group_name|truncatewords:"10" }}</h3>
+                    <p class="card-text">{{ object.group_description|truncatewords:"20" }}</p>
+                </div>
+
+                <div class="card-footer">
+                    <a href="{% url 'todo:update_group' object.pk %}" class="btn btn-outline-success">
+                        <i class='fa fa-edit'></i>
+                        Edit
+                    </a>
+                    <a href="{% url 'todo:delete_group' object.pk %}" class="btn btn-outline-danger float-right">
+                        <i class='fa fa-trash'></i>
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock body %}
