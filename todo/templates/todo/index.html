@@ -8,8 +8,11 @@
 {% block body %}
 <div class="text-center my-5 p-5">
     <div class="row">
-        <div class="col">
-            <h1 class='font-weight-bold' style='font-size: 3.5rem'>
+        <div class="col-12 col-sm-8 col-lg-5 mx-auto">
+            <img src="{% static 'images/data.png' %}" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col text-lg-left">
+            <h1 class='font-weight-bold'>
                 Free up your mental space
             </h1>
 
@@ -20,28 +23,29 @@
                 you
                 are or what device you use).
             </p>
-            <a href="{% url 'todo:features' %}" class="btn  btn-lg btn-primary float-left">Features</a>
+            <div class="d-flex justify-content-around flex-wrap">
 
-            {% if request.user.is_anonymous %}
-            <a href="{% url 'user:register' %}" class="btn btn-lg btn-primary float-right">
-                <i class="fa fa-arrow-alt-circle-right"></i>
-                <span>
-                    Let's Start
-                </span>
-            </a>
-            {% else %}
-            <a href="{% url 'todo:groups' %}" class="btn btn-lg btn-primary float-right">
-                <i class="fa fa-arrow-alt-circle-right"></i>
-                <span>
-                    Let's Start
-                </span>
-            </a>
-            {% endif %}
+                <a href="{% url 'todo:features' %}" class="btn btn-lg btn-primary my-1 my-sm-0">Features</a>
+
+
+                {% if request.user.is_anonymous %}
+                <a href="{% url 'user:register' %}" class="btn btn-lg btn-primary">
+                    <i class="fa fa-arrow-alt-circle-right"></i>
+                    <span>
+                        Let's Start
+                    </span>
+                </a>
+                {% else %}
+                <a href="{% url 'todo:groups' %}" class="btn btn-lg btn-primary">
+                    <i class="fa fa-arrow-alt-circle-right"></i>
+                    <span>
+                        Let's Start
+                    </span>
+                </a>
+                {% endif %}
+            </div>
         </div>
 
-        <div class="col-4">
-            <img src="{% static 'images/data.png' %}" class="img-fluid" alt="Responsive image">
-        </div>
     </div>
 </div>
 {% endblock body %}

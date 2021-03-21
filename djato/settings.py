@@ -10,23 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import dotenv
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Load .env file
-dotenv.load_dotenv()
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  os.getenv('DJANGO_SECRET_KEY', 'opq=n3i@o#y9@^jds@577%wi$@hox^j+*m493o!u@e%ncni(b)')
+SECRET_KEY =  'opq=n3i@o#y9@^jds@577%wi$@hox^j+*m493o!u@e%ncni(b)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv('DJANGO_DEBUG') == 'True' else False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -47,7 +43,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,24 +75,13 @@ WSGI_APPLICATION = 'djato.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('DJANGO_DATABASE_ENGINE'),
-            'NAME': os.getenv('DJANGO_DATABASE_NAME'),
-            'USER': os.getenv('DJANGO_DATABASE_USER'),
-            'PASSWORD': os.getenv('DJANGO_DATABASE_PASSWORD'),
-            'HOST': os.getenv('DJANGO_DATABASE_HOST'),
-            'PORT': os.getenv('DJANGO_DATABASE_PORT'),
-        }
-    }
+}
 
 
 # Password validation
@@ -137,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]

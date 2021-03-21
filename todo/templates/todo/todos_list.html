@@ -24,10 +24,10 @@
     {% endif %}
 
     {% if todo.completed %}
-    <a class="btn btn-warning" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Uncomplete</a>
+    <a class="btn btn-warning btn-sm" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Uncomplete</a>
     {% else %}
     <p class="my-4" style="white-space: pre-wrap;">{{ todo.description }}</p>
-    <a class="btn btn-info" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Complete</a>
+    <a class="btn btn-info btn-sm" href="{% url 'todo:change_todo_state' group.pk todo.pk %}">Complete</a>
     {% endif %}
     <a class="btn btn-danger float-right ml-3" href="{% url 'todo:delete_todo' group.pk todo.pk %}">Delete</a>
     <a class="btn btn-primary float-right" href="{% url 'todo:edit_todo' group.pk todo.pk %}">Edit</a>
